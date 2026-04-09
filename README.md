@@ -55,7 +55,7 @@ Step-by-step flow that structures your prompt automatically:
 ### 📋 One-Click Copy
 - Generated prompt copies to clipboard instantly
 - Open Claude, ChatGPT, or Gemini directly from the panel
-- No API key needed — works with free accounts
+- Works entirely with free accounts — no API key needed
 
 ---
 
@@ -71,7 +71,7 @@ Step-by-step flow that structures your prompt automatically:
 
 ### Manual Install (now)
 ```bash
-git clone https://github.com/yourusername/leanprompt
+git clone https://github.com/Adi-gyt/leanprompt
 cd leanprompt
 npm install
 npm run compile
@@ -110,7 +110,17 @@ Hit **Generate Prompt**, copy it, paste into Claude or ChatGPT.
 
 ## Screenshots
 
-*Coming soon — see demo reel*
+**Step 1 — Pick what you need, load your code**
+![LeanPrompt header and step 1](images/screenshot1.png)
+
+**Step 2 — Extract code from editor with token counts**
+![Code extraction with token estimates](images/screenshot3.png)
+
+**Generate Prompt — token meter warning**
+![Token meter at 2060 tokens with warning](images/screenshot4.png)
+
+**Generate Prompt — compact and efficient**
+![Token meter green, compact prompt](images/screenshot2.png)
 
 ---
 
@@ -128,15 +138,13 @@ Hit **Generate Prompt**, copy it, paste into Claude or ChatGPT.
 | Shortcut | Action |
 |----------|--------|
 | `Ctrl+Shift+K` | Open LeanPrompt |
-| `Ctrl+Shift+A` | Configure API Keys |
 
 ---
 
 ## Privacy
 
 - Everything runs locally in VS Code
-- No data sent anywhere (unless you use an API key)
-- API keys stored securely by VS Code — never in plain text
+- No data sent anywhere
 - No telemetry, no tracking
 
 ---
@@ -144,8 +152,6 @@ Hit **Generate Prompt**, copy it, paste into Claude or ChatGPT.
 ## Roadmap
 
 - [ ] Publish to VS Code Marketplace
-- [ ] Claude API direct integration (send and receive in sidebar)
-- [ ] ChatGPT API integration
 - [ ] Token usage history
 - [ ] Custom prompt templates
 - [ ] VHDL / SystemVerilog specific prompt modes
