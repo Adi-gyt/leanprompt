@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LeanPrompt</title>
+    <link rel="stylesheet" href="{{STYLE_URI}}"/>
+</head>
+<body>
+
+<div class="main-content">
+
+    <div class="main-header">
+        <div>
+            <div class="main-title">LeanPrompt</div>
+            <div class="main-subtitle">Better prompts. Fewer tokens.</div>
+        </div>
+        <div class="header-controls">
+            <span style="font-size:11px; color:#666;">Chats:</span>
+            <span class="chat-counter-badge" id="chatCountBadge">0</span>
+            <button onclick="resetChatCount()">Reset</button>
+            <div onclick="cycleModel()" class="model-badge" id="modelBadge" title="Click to change model">
+                <span>Sonnet</span><span style="font-size:9px; color:#166534;">recommended</span>
+            </div>
+        </div>
+    </div>
+    <div id="freshChatAlert" class="fresh-chat-alert">
+        You're at <strong id="alertCount">15</strong> chats — tokens are getting expensive.
+        Use <strong>Session Handoff</strong> prompt and start a fresh chat.
+    </div>
+
+    <!-- Step 1: What do you need? -->
+    <div class="card">
+        <div class="card-title">Step 1 — What do you need?</div>
+        <select id="promptType" onchange="updatePromptHint()">
+            <option value="error">Debug — I have an error</option>
+            <option value="wrongoutput">Debug — Wrong output (no error)</option>
+            <option value="works">Review — Code works, want feedback</option>
+            <option value="concept">Learn — Explain a concept</option>
+            <option value="quiz">Learn — Quiz me</option>
+            <option value="continuation">Continue — Already in a chat</option>
+        </select>
+        <div class="hint-box" id="promptHint"></div>
+    </div>
+
+    <!-- Step 2: Your Code -->
+    <div class="card">
+        <div class="card-title">Step 2 — Your Code</div>
+
+        <div class="section-block">
+            <div class="section-block-title">File 1</div>
+            <div class="file-meta">
+                <span class="file-name" id="file1Name">No file loaded</span>
+                <span class="file-size" id="file1Size"></span>
+                <span class="file-token-count" id="file1Tokens"></span>
+                <button onclick="extractCode(1)">Extract from Editor</button>
+            </div>
+            <div class="summary-bar" id="file1SummaryBar">
+                <span id="file1SummaryText"></span>
+            </div>
+            <textarea id="codeArea1" placeholder="Paste or extract your code here..."></textarea>
+        </div>
+
+        <div class="section-block">
+            <div class="section-block-title">File 2 (optional)</div>
+            <div class="file-meta">
+                <span class="file-name" id="file2Name">No file loaded</span>
+                <span class="file-size" id="file2Size"></span>
+                <span class="file-token-count" id="file2Tokens"></span>
+                <button onclick="extractCode(2)">Extract from Editor</button>
+            </div>
+            <div class="summary-bar" id="file2SummaryBar">
+                <span id="file2SummaryText"></span>
+            </div>
+            <textarea id="codeArea2" placeholder="Optional second file..."></textarea>
+        </div>
+    </div>
+
+    <!-- Step 3: Error / Output -->
+    <div class="card">
+        <div class="card-title">Step 3 — Error or Output</div>
+        <textarea id="copilotSummary" placeholder="Paste your error message or wrong output here..." rows="4"></textarea>
+        <div class="error-compressed" id="errorCompressed"></div>
+    </div>
+
+    <!-- Step 4: Your Thoughts -->
+    <div class="card">
+        <div class="card-title">Step 4 — Your Thoughts (optional but powerful)</div>
+        <textarea id="thoughtsInput" placeholder="What do you think is happening? Your hypothesis? What you expected?" rows="3"></textarea>
+        <div class="thoughts-nudge" id="thoughtsNudge">
+            Tip: Adding your hypothesis improves AI responses and helps you learn faster.
+        </div>
+    </div>
+
+    <!-- Follow-up banner -->
+    <div class="followup-banner" id="followupBanner">
+        Follow-up detected — using a shorter prompt that skips repeated context to save tokens.
+    </div>
+
+    <!-- Generate -->
+    <div class="card">
+        <div class="card-title">Generate Prompt</div>
+        <div class="token-meter" id="tokenMeter">
+            <div class="token-meter-bar-wrap">
+                <div class="token-meter-bar" id="tokenMeterBar"></div>
+            </div>
+            <div class="token-meter-info">
+                <span id="tokenMeterCount">0</span> / 3,000 tokens
+                <span class="token-meter-tip" id="tokenMeterTip"></span>
+            </div>
+        </div>
+        <div id="handoffTrigger" style="display:none; margin-bottom:8px;">
+            <button class="warning" onclick="triggerHandoff()">⚠ Session Handoff — copy prompt to paste in chat</button>
+        </div>
+        <div class="button-group">
+            <button class="primary" onclick="generatePrompt()">Generate Prompt</button>
+            <button onclick="copyPrompt()">Copy to Clipboard</button>
+        </div>
+        <div id="browserButtons" style="display:none; gap:8px; margin-top:8px;">
+            <span style="font-size:11px; color:#666; align-self:center;">Open new chat:</span>
+            <button onclick="openClaude()">Claude</button>
+            <button onclick="openChatGPT()">ChatGPT</button>
+            <button onclick="openGemini()">Gemini</button>
+        </div>
+        <div class="prompt-box" id="promptOutput">
+            <span class="prompt-placeholder">Prompt will appear here...</span>
+        </div>           
+    </div>
+</div><!-- end main-content -->
+
+<div class="notification" id="notification"></div>
+
+<script src="{{SCRIPT_URI}}"></script>
+</body>
+</html>

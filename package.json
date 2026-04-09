@@ -1,0 +1,89 @@
+{
+  "name": "study-bridge",
+  "displayName": "Study Bridge",
+  "description": "AI-powered study companion: compress coding context, track progress, generate optimized prompts for Claude & ChatGPT",
+  "version": "1.0.0",
+  "publisher": "your-name",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Education",
+    "Productivity",
+    "Developer Tools"
+  ],
+  "keywords": [
+    "ai",
+    "study",
+    "claude",
+    "chatgpt",
+    "learning",
+    "coding",
+    "education",
+    "rtl"
+  ],
+  "main": "./out/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/study-bridge"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "study-bridge.openDashboard",
+        "title": "Study Bridge: Open Dashboard",
+        "category": "Study Bridge"
+      },
+      {
+        "command": "study-bridge.configureApi",
+        "title": "Study Bridge: Configure API Keys",
+        "category": "Study Bridge"
+      },
+      {
+        "command": "study-bridge.exportSession",
+        "title": "Study Bridge: Export Session",
+        "category": "Study Bridge"
+      },
+      {
+        "command": "study-bridge.importSession",
+        "title": "Study Bridge: Import Session",
+        "category": "Study Bridge"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "study-bridge.openDashboard",
+        "key": "ctrl+shift+k",
+        "mac": "cmd+shift+k"
+      },
+      {
+        "command": "study-bridge.configureApi",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "^20.0.0",
+    "@types/glob": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vscode-test": "^1.6.1",
+    "@vscode/test-electron": "^2.3.0",
+    "esbuild": "^0.17.0"
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "test": "node ./out/test/runTest.js",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts"
+  }
+}
