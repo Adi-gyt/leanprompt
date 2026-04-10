@@ -32,14 +32,14 @@
     <!-- Step 1: What do you need? -->
     <div class="card">
         <div class="card-title">Step 1 — What do you need?</div>
-        <select id="promptType" onchange="updatePromptHint()">
-            <option value="error">Debug — I have an error</option>
-            <option value="wrongoutput">Debug — Wrong output (no error)</option>
-            <option value="works">Review — Code works, want feedback</option>
-            <option value="concept">Learn — Explain a concept</option>
-            <option value="quiz">Learn — Quiz me</option>
-            <option value="continuation">Continue — Already in a chat</option>
-        </select>
+        <div class="mode-buttons" id="promptType">
+            <button class="mode-btn active" data-value="error" onclick="selectMode(this)">🔴 Error</button>
+            <button class="mode-btn" data-value="wrongoutput" onclick="selectMode(this)">⚠️ Wrong output</button>
+            <button class="mode-btn" data-value="works" onclick="selectMode(this)">✅ Review</button>
+            <button class="mode-btn" data-value="concept" onclick="selectMode(this)">💡 Concept</button>
+            <button class="mode-btn" data-value="quiz" onclick="selectMode(this)">❓ Quiz</button>
+            <button class="mode-btn" data-value="continuation" onclick="selectMode(this)">↩ Continue</button>
+        </div>
         <div class="hint-box" id="promptHint"></div>
     </div>
 
@@ -54,6 +54,7 @@
                 <span class="file-size" id="file1Size"></span>
                 <span class="file-token-count" id="file1Tokens"></span>
                 <button onclick="extractCode(1)">Extract from Editor</button>
+                <button onclick="clearSlot(1)">Clear</button>
             </div>
             <div class="summary-bar" id="file1SummaryBar">
                 <span id="file1SummaryText"></span>
@@ -68,6 +69,7 @@
                 <span class="file-size" id="file2Size"></span>
                 <span class="file-token-count" id="file2Tokens"></span>
                 <button onclick="extractCode(2)">Extract from Editor</button>
+                <button onclick="clearSlot(2)">Clear</button>
             </div>
             <div class="summary-bar" id="file2SummaryBar">
                 <span id="file2SummaryText"></span>
@@ -78,14 +80,17 @@
 
     <!-- Step 3: Error / Output -->
     <div class="card">
-        <div class="card-title">Step 3 — Error or Output</div>
+        <div class="card-title">
+            Step 3 — Error or Output
+            <button onclick="clearError()">Clear</button>
+        </div>
         <textarea id="copilotSummary" placeholder="Paste your error message or wrong output here..." rows="4"></textarea>
         <div class="error-compressed" id="errorCompressed"></div>
     </div>
 
     <!-- Step 4: Your Thoughts -->
     <div class="card">
-        <div class="card-title">Step 4 — Your Thoughts (optional but powerful)</div>
+        <div class="card-title">Step 4 — Your Thoughts (optional but powerful)<button onclick="clearThoughts()">Clear</button></div>
         <textarea id="thoughtsInput" placeholder="What do you think is happening? Your hypothesis? What you expected?" rows="3"></textarea>
         <div class="thoughts-nudge" id="thoughtsNudge">
             Tip: Adding your hypothesis improves AI responses and helps you learn faster.
@@ -107,6 +112,7 @@
             <div class="token-meter-info">
                 <span id="tokenMeterCount">0</span> / 3,000 tokens
                 <span class="token-meter-tip" id="tokenMeterTip"></span>
+                <span id="tokenSavings" style="display:none; font-size:10px; color:#16a34a;"></span>
             </div>
         </div>
         <div id="handoffTrigger" style="display:none; margin-bottom:8px;">
@@ -114,7 +120,6 @@
         </div>
         <div class="button-group">
             <button class="primary" onclick="generatePrompt()">Generate Prompt</button>
-            <button onclick="copyPrompt()">Copy to Clipboard</button>
         </div>
         <div id="browserButtons" style="display:none; gap:8px; margin-top:8px;">
             <span style="font-size:11px; color:#666; align-self:center;">Open new chat:</span>
@@ -122,9 +127,15 @@
             <button onclick="openChatGPT()">ChatGPT</button>
             <button onclick="openGemini()">Gemini</button>
         </div>
-        <div class="prompt-box" id="promptOutput">
-            <span class="prompt-placeholder">Prompt will appear here...</span>
-        </div>           
+        <div style="position:relative; margin-top:12px;">
+            <button onclick="copyPrompt()" title="Copy to clipboard" id="copyBtn"
+                 style="position:absolute; top:6px; right:6px; padding:5px 8px; font-size:13px; z-index:1; line-height:1; background:#2563eb; color:white; border:none; border-radius:4px; cursor:pointer; opacity:0.85; transition: opacity 0.2s, transform 0.2s;"
+                 onmouseover="this.style.opacity='1'; this.style.transform='scale(1.1)'; this.title='Copy'"
+                 onmouseout="this.style.opacity='0.85'; this.style.transform='scale(1)'">⎘</button>
+            <div class="prompt-box" id="promptOutput">
+                <span class="prompt-placeholder">Prompt will appear here...</span>
+            </div>                                                                                                
+        </div>          
     </div>
 </div><!-- end main-content -->
 

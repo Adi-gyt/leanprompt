@@ -1,75 +1,74 @@
 # LeanPrompt
 
-**Write better AI prompts. Stop burning tokens.**
+**Write better AI prompts from inside VS Code. Stop burning tokens.**
 
-A VS Code extension that helps you structure your prompts intelligently — so you get better answers from Claude, ChatGPT, and Gemini without wasting your free session limits.
-
-> Built in 2 days using prompt engineering. No prior web dev experience needed to use it.
+`Ctrl+Shift+K` → structured prompt → copy → paste. Done.
 
 ---
 
-## Why LeanPrompt?
+## Why
 
-If you use Claude or ChatGPT to help you code, you've probably hit these problems:
+When you paste raw code into Claude or ChatGPT, you get raw answers. Long chats hit token limits. Vague prompts waste context. You start over and explain everything again.
 
-- 🔴 **Token limit hit mid-session** — context lost, have to start over
-- 🔴 **Vague prompts get vague answers** — "fix my code" doesn't work
-- 🔴 **Pasting too much code** — wastes tokens, confuses the AI
-- 🔴 **No way to hand off context** — switching chats loses everything
+LeanPrompt fixes the workflow — not the AI.
 
-LeanPrompt solves all of this from inside VS Code.
+---
+
+## How It Works
+
+### Step 1 — Pick what you need
+
+| Mode | When to use |
+|------|-------------|
+| 🔴 Error | Code won't compile or crashes |
+| ⚠️ Wrong output | Runs, but gives the wrong result |
+| ✅ Review | Works — want a quick confirm + one tip |
+| 💡 Concept | Type your understanding, AI flags gaps only |
+| ❓ Quiz | One question at a time, tests your understanding |
+| ↩ Continue | Mid-chat — skips re-sending context to save tokens |
+
+### Step 2 — Extract your code
+
+Click **Extract from Editor** — pulls your active file directly. Supports 2 files simultaneously. Large files are truncated at logical boundaries (not mid-function), with a token estimate shown per file.
+
+### Step 3 — Add error or output
+
+Paste your error message or wrong output. LeanPrompt includes it in the prompt with the right framing for the mode you picked.
+
+### Step 4 — Add your hypothesis (optional)
+
+What do you think is going wrong? Even one sentence here makes AI responses noticeably better.
+
+### Generate → Copy → Paste
+
+Hit **Generate Prompt**. Copy it. Paste into Claude, ChatGPT, or Gemini.
 
 ---
 
 ## Features
 
-### 🎯 Guided Prompt Builder
-Step-by-step flow that structures your prompt automatically:
-- What do you need? (debug, review, learn, quiz, continue)
-- Your code — extracted directly from your active editor
-- Your error or wrong output
-- Your hypothesis — makes AI responses dramatically better
+**Token Meter** — live estimate as you build, color-coded green → yellow → red. Warns before you hit limits and suggests what to trim.
 
-### ⚡ Smart Code Extraction
-- Pull code directly from your active VS Code editor — one click
-- Supports 2 files simultaneously
-- Auto-truncates large files at logical boundaries (not mid-function)
-- Shows token estimate per file before you send
+**Follow-up detection** — if you're continuing the same problem, LeanPrompt generates a shorter prompt that skips repeated context.
 
-### 📊 Token Meter
-- Real-time token count as you build your prompt
-- Color-coded: green → yellow → red
-- Warns before you hit limits
-- Suggests trimming strategies
+**Session Handoff** — when a chat gets too long, generate a compact summary (under 200 words) to paste into a fresh chat. Resets your counter automatically.
 
-### 🔄 Session Handoff
-- Detects when your chat is getting long
-- Generates a handoff prompt to paste into a fresh chat
-- Preserves context without re-explaining everything
+**Chat counter** — tracks how many prompts you've sent this session. Turns yellow at 15, red at 20, with a reminder to hand off.
 
-### 🤖 Model Awareness
-- Toggle between Sonnet (efficient) and Opus (powerful)
-- Reminds you Opus costs 3-5x more tokens
-- Chat counter tracks how many messages you've sent
+**Model toggle** — click the badge to switch between Sonnet (fast, efficient, recommended) and Opus (higher quality, slower). Opus warning is shown.
 
-### 📋 One-Click Copy
-- Generated prompt copies to clipboard instantly
-- Open Claude, ChatGPT, or Gemini directly from the panel
-- Works entirely with free accounts — no API key needed
+**Open AI directly** — buttons to open Claude, ChatGPT, or Gemini in your browser without leaving VS Code.
+
+**Session persistence** — chat count and prompt number survive VS Code restarts.
 
 ---
 
 ## Installation
 
-### From VS Code Marketplace
-*(Coming soon)*
+### VS Code Marketplace
+Search **LeanPrompt** in the Extensions panel (`Ctrl+Shift+X`).
 
-1. Open VS Code
-2. Go to Extensions (`Ctrl+Shift+X`)
-3. Search `LeanPrompt`
-4. Click Install
-
-### Manual Install (now)
+### Manual
 ```bash
 git clone https://github.com/Adi-gyt/leanprompt
 cd leanprompt
@@ -77,103 +76,38 @@ npm install
 npm run compile
 npx vsce package
 ```
-Then in VS Code: Extensions → `...` → Install from VSIX → select the `.vsix` file
+Extensions → `···` → **Install from VSIX** → select the `.vsix` file.
 
 ---
 
-## How to Use
-
-**1. Open LeanPrompt**
-`Ctrl+Shift+K` (or `Cmd+Shift+K` on Mac)
-
-**2. Pick what you need**
-- Debug — I have an error
-- Debug — Wrong output
-- Review — Code works, want feedback
-- Learn — Explain a concept
-- Learn — Quiz me
-- Continue — Already in a chat
-
-**3. Extract your code**
-Click **Extract from Editor** — pulls your active file automatically
-
-**4. Add your error or output**
-Paste the error message or wrong result
-
-**5. Add your hypothesis** *(optional but powerful)*
-What do you think is happening? This alone improves AI responses significantly.
-
-**6. Generate → Copy → Paste**
-Hit **Generate Prompt**, copy it, paste into Claude or ChatGPT.
-
----
-
-## Screenshots
-
-**Step 1 — Pick what you need, load your code**
-![LeanPrompt header and step 1](images/screenshot1.png)
-
-**Step 2 — Extract code from editor with token counts**
-![Code extraction with token estimates](images/screenshot3.png)
-
-**Generate Prompt — token meter warning**
-![Token meter at 2060 tokens with warning](images/screenshot4.png)
-
-**Generate Prompt — compact and efficient**
-![Token meter green, compact prompt](images/screenshot2.png)
-
----
-
-## Who Is This For?
-
-- Students learning to code with AI assistance
-- Developers who hit Claude's free token limits regularly
-- Anyone who wants more structured, efficient AI prompts
-- ECE / embedded / RTL learners using AI for Verilog, VHDL, SystemVerilog
-
----
-
-## Keyboard Shortcuts
+## Keyboard Shortcut
 
 | Shortcut | Action |
 |----------|--------|
-| `Ctrl+Shift+K` | Open LeanPrompt |
+| `Ctrl+Shift+K` / `Cmd+Shift+K` | Open LeanPrompt |
 
 ---
 
 ## Privacy
 
-- Everything runs locally in VS Code
-- No data sent anywhere
-- No telemetry, no tracking
+Runs entirely inside VS Code. No data leaves your machine. No telemetry, no API calls, no tracking.
 
 ---
 
 ## Roadmap
 
-- [ ] Publish to VS Code Marketplace
-- [ ] Token usage history
+- [ ] Token usage history across sessions
 - [ ] Custom prompt templates
-- [ ] VHDL / SystemVerilog specific prompt modes
-
----
-
-## Built With
-
-- TypeScript + VS Code Extension API
-- Vanilla JS / HTML / CSS (webview)
-- Built using prompt engineering — AI-assisted development
+- [ ] VHDL / SystemVerilog specific modes
 
 ---
 
 ## License
 
-MIT — free to use, modify, and distribute.
+MIT
 
 ---
 
 ## About
 
-LeanPrompt started as a personal tool to stop wasting Claude tokens while learning RTL and FPGA design. It turned into something anyone can use.
-
-**Made by an ECE student, for anyone who codes with AI.**
+Started as a personal tool to stop wasting Claude tokens while learning RTL and FPGA design. Built by an ECE student using TypeScript + VS Code Extension API.
