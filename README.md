@@ -6,6 +6,8 @@
 
 ---
 
+![Demo](images/Animation.gif)
+
 ## Why
 
 When you paste raw code into Claude or ChatGPT, you get raw answers. Long chats hit token limits. Vague prompts waste context. You start over and explain everything again.
@@ -52,6 +54,8 @@ Hit **Generate Prompt**. Copy it. Paste into Claude, ChatGPT, or Gemini.
 **Follow-up detection** — if you're continuing the same problem, LeanPrompt generates a shorter prompt that skips repeated context.
 
 **Session Handoff** — when a chat gets too long, generate a compact summary (under 200 words) to paste into a fresh chat. Resets your counter automatically.
+
+![Session Handoff](images/screenshot_handoff.png)
 
 **Chat counter** — tracks how many prompts you've sent this session. Turns yellow at 15, red at 20, with a reminder to hand off.
 
