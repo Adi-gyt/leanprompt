@@ -8,6 +8,42 @@
 
 ![Demo](images/Animation.gif)
 
+## 🧪 Example (Real Debug Case)
+
+### Input
+
+Code:
+async def fetch_user_data(user_id):
+    response = await api.get(f"/users/{user_id}")
+    return response.data.profile.name
+
+Error:
+AttributeError: 'NoneType' object has no attribute 'profile'
+
+---
+
+### Generated Prompt
+
+Error: AttributeError: 'NoneType' object has no attribute 'profile'
+
+My thinking: API might sometimes return null data.
+
+Explain:
+- What exactly is None here
+- Which line causes the crash
+- Why it happens in this async/API context
+- Minimal fix only (no rewrite)
+
+---
+
+### Why this is better
+
+- Targets the exact failure instead of dumping full code
+- Keeps token usage low
+- Produces precise, minimal fixes from AI
+
+---
+
 ## Why
 
 When you paste raw code into Claude or ChatGPT, you get raw answers. Long chats hit token limits. Vague prompts waste context. You start over and explain everything again.
