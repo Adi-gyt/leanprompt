@@ -2,15 +2,14 @@
   "name": "leanprompt",
   "displayName": "LeanPrompt",
   "description": "Write better AI prompts from inside VS Code. Structure your context, trim tokens, copy and paste.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "stillbuild",
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.80.0"
   },
   "categories": [
-    "Productivity",
-    "Developer Tools"
+   "Other"
   ],
   "keywords": [
     "ai",
