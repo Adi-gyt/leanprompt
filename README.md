@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="images/icon.png" width="128"/>
+</p>
+
 # LeanPrompt
 
 [Install from VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=stillbuild.leanprompt)
