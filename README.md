@@ -65,6 +65,10 @@ LeanPrompt fixes the workflow — not the AI.
 | ❓ Quiz | One question at a time, tests your understanding |
 | ↩ Continue | Mid-chat — skips re-sending context to save tokens |
 
+## Screenshots
+![LeanPrompt Full Panel](images/screenshot_fullpanel.png)
+![Token Warning](images/screenshot_warning.png)
+
 ### Step 2 — Extract your code
 
 Click **Extract from Editor** — pulls your active file directly. Supports 2 files simultaneously. Large files are truncated at logical boundaries (not mid-function), with a token estimate shown per file.
