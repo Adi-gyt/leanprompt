@@ -1,5 +1,7 @@
 # LeanPrompt
 
+'[Install from VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=stillbuild.leanprompt)'
+
 **Write better AI prompts from inside VS Code. Stop burning tokens.**
 
 `Ctrl+Shift+K` → structured prompt → copy → paste. Done.
